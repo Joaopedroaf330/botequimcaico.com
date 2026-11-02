@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botequim Caicó | Espetinhos na Brasa, Farofa & Vinagrete</title>
+    <!-- Fontes com personalidade de Botequim Nordestino / Letreiro Rústico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rye&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Fundo Global Fixo com a foto dos espetos bem assadinhos, farofa e vinagrete no prato de plástico preto -->
+    <div class="global-bg-backdrop" aria-hidden="true"></div>
+
+    <!-- Faixa clássica de Botequim Raiz + Varal de Luzes Quentes -->
+    <div class="boteco-checker-strip"></div>
+    <div class="string-lights" aria-hidden="true">
+        <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+        <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+        <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+        <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+        <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+    </div>
+
+    <!-- Barra de Navegação -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <div class="brand-seal">🍢</div>
+                <div class="brand-text">
+                    <h1>Botequim Caicó</h1>
+                    <span>Brasa Viva • Sabor Legítimo do Seridó</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#cardapio">Cardápio na Brasa</a></li>
+                <li><a href="#tradicao">Nosso Botequim</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-status-brasa" onclick="abrirPainelBrasa()">
+                    <span>🔥</span> Pedidos na Brasa
+                </button>
+                <button class="btn-comanda" onclick="toggleComanda(true)">
+                    <span>📝</span> Minha Comanda
+                    <span class="comanda-badge" id="comanda-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION COM A FOTO DE FUNDO DOS ESPETOS COM FAROFA E VINAGRETE -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span>🔥</span> Direto de Caicó pro seu prato • Brasa Acesa Hoje!
+                </div>
+                <h2 class="hero-title">
+                    Espetinho Bem Assadinho,
+                    <span>com Farofa & Vinagrete!</span>
+                </h2>
+                <p class="hero-subtitle">
+                    Aqui no <strong>Botequim Caicó</strong> o espeto sai chiando da churrasqueira, passado na manteiga da terra legítima e servido do jeito que o povo gosta: bem assadinho, com farofa crocante e vinagrete fresquinho sem miséria!
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#cardapio" class="btn-primary-botequim">
+                        <span>🍢</span> Escolher Meus Espetinhos
+                    </a>
+                    <button type="button" class="btn-secondary-botequim" onclick="toggleComanda(true)" style="cursor:pointer;">
+                        <span>🍺</span> Ver Minha Comanda
+                    </button>
+                </div>
+
+                <div class="hero-badges">
+                    <div class="hero-badge-card">
+                        <strong>🥩 Carne de Sol de Caicó</strong>
+                        <small>Macia, suculenta e assada na manteiga do sertão</small>
+                    </div>
+                    <div class="hero-badge-card">
+                        <strong>🍽️ Acompanhamento Completo</strong>
+                        <small>Com farofa dourada e vinagrete caprichado</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vitrine Destaque do Botequim Caicó -->
+            <div class="hero-plate-showcase">
+                <div class="hero-plate-img-wrap">
+                    <img src="{{ url_for('static', filename='img/espetinho_bg.jpg') }}"
+                         alt="Espetinhos bem assadinhos com farofa e vinagrete no Botequim Caicó">
+                    <div class="plate-stamp">
+                        <div class="plate-stamp-text">
+                            <strong>O Clássico do Botequim Caicó</strong>
+                            <span>Espetos no ponto + Farofa crocante + Vinagrete</span>
+                        </div>
+                        <span class="plate-stamp-price">A partir de R$ 11,50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quadro do Churrasqueiro -->
+    <div class="chalkboard-banner">
+        <div class="chalkboard-inner">
+            <div class="chalkboard-left">
+                <span class="chalkboard-icon">👨‍🍳</span>
+                <div>
+                    <h3>Recado do Churrasqueiro de Caicó:</h3>
+                    <p>Todos os nossos espetinhos de carne, frango, coração e linguiça já vão servidos <strong>com farofa na manteiga da terra e vinagrete fresquinho!</strong></p>
+                </div>
+            </div>
+            <div class="chalkboard-pills">
+                <span class="chalk-pill">⚡ Entrega Rápida Quentinha</span>
+                <span class="chalk-pill">🪑 Mesas na Calçada</span>
+                <span class="chalk-pill">🧀 Queijo Coalho com Mel</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO DO CARDÁPIO -->
+    <main class="menu-section" id="cardapio">
+        <div class="section-header">
+            <span class="eyebrow">Cardápio Raiz do Seridó</span>
+            <h2>O Que Vai pra Brasa Hoje?</h2>
+            <p>Escolha o ponto do seu espeto, capriche na farofa com vinagrete e monte sua comanda de botequim sem sair de casa ou direto da sua mesa.</p>
+        </div>
+
+        <!-- Filtros por Categoria e Busca -->
+        <div class="menu-controls" id="combos">
+            <div class="category-tabs">
+                <button class="cat-btn active" data-cat-btn="todos" onclick="filtrarCategoria('todos', this)">
+                    🔥 Todos ({{ menu_items|length }})
+                </button>
+                <button class="cat-btn" data-cat-btn="espetinhos" onclick="filtrarCategoria('espetinhos', this)">
+                    🍢 Espetinhos na Brasa
+                </button>
+                <button class="cat-btn" data-cat-btn="porcoes" onclick="filtrarCategoria('porcoes', this)">
+                    🍟 Porções
+                </button>
+                <button class="cat-btn" data-cat-btn="jantas" onclick="filtrarCategoria('jantas', this)">
+                    🍛 Jantas
+                </button>
+                <button class="cat-btn" data-cat-btn="caldinhos" onclick="filtrarCategoria('caldinhos', this)">
+                    🥣 Caldinhos
+                </button>
+                <button class="cat-btn" data-cat-btn="bebidas" onclick="filtrarCategoria('bebidas', this)">
+                    🍺 Bebidas
+                </button>
+            </div>
+
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="busca-espeto" placeholder="Buscar carne de sol, queijo, cerveja..." oninput="aplicarFiltrosCardapio()">
+            </div>
+        </div>
+
+        <!-- Grid de Produtos -->
+        <div class="menu-grid">
+            {% for item in menu_items %}
+            <article class="menu-card {% if item.destaque %}destaque{% endif %}"
+                     data-categoria="{{ item.categoria }}"
+                     data-nome="{{ item.nome }}"
+                     data-desc="{{ item.descricao }}">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon-badge">{{ item.icone }}</div>
+                        <span class="card-selo">{{ item.selo }}</span>
+                    </div>
+
+                    <h3 class="card-title">{{ item.nome }}</h3>
+                    <p class="card-desc">{{ item.descricao }}</p>
+
+                    {% if item.acompanha_farofa %}
+                    <div class="prato-preto-tag">
+                        <span>🌾</span> Acompanha Farofa + Vinagrete
+                    </div>
+                    {% endif %}
+
+                    {% if item.opcoes %}
+                    <div class="card-options">
+                        <label for="ponto-{{ item.id }}">{{ item.opcoes_label or 'Escolha uma opção:' }}</label>
+                        <select id="ponto-{{ item.id }}" onchange="atualizarPrecoOpcao({{ item.id }}, this)">
+                            {% for op in item.opcoes %}
+                            <option value="{{ op.valor }}" data-preco="{{ op.preco }}">{{ op.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% elif item.categoria == 'espetinhos' %}
+                    <div class="card-options">
+                        <label for="ponto-{{ item.id }}">Ponto do espeto e acompanhamento:</label>
+                        <select id="ponto-{{ item.id }}">
+                            <option value="Bem Assadinho + Farofa e Vinagrete">🔥 Bem Assadinho + Farofa e Vinagrete</option>
+                            <option value="Ao Ponto Suculento + Farofa e Vinagrete">🥩 Ao Ponto Suculento + Farofa e Vinagrete</option>
+                            <option value="Bem Tostadinho + Só Farofa">🌾 Bem Tostadinho + Só Farofa</option>
+                            <option value="Bem Assadinho + Capricha no Vinagrete">🥗 Bem Assadinho + Extra de Vinagrete</option>
+                        </select>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer">
+                    <div class="card-price">
+                        <small>Valor na Comanda</small>
+                        <strong id="preco-card-{{ item.id }}">R$ {{ "%.2f"|format(item.preco)|replace('.', ',') }}</strong>
+                    </div>
+
+                    <button type="button"
+                            class="btn-add-espeto"
+                            onclick="adicionarNaComanda({{ item.id }}, '{{ item.nome|e }}', {{ item.preco }}, {{ 'true' if (item.opcoes or item.categoria == 'espetinhos') else 'false' }})">
+                        <span>+</span> Anotar na Comanda
+                    </button>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- SEÇÃO HISTÓRIA E ESTILO DO BOTEQUIM CAICÓ -->
+    <section class="tradicao-section" id="tradicao">
+        <div class="tradicao-card">
+            <div class="tradicao-content">
+                <span style="color:#fbbf24;font-weight:800;text-transform:uppercase;font-size:0.8rem;letter-spacing:1.5px;">
+                    Alma de Boteco • Coração Seridoense
+                </span>
+                <h3>Por que o Espetinho do Botequim Caicó é Diferente?</h3>
+                <p>
+                    Em Caicó, carne boa é assunto sério! Nosso botequim nasceu para juntar os amigos em volta da mesa de madeira, com cerveja trincando no copo americano e aquele cheiro irresistível de carne de sol assando no carvão em brasa.
+                </p>
+                <ul class="tradicao-list">
+                    <li><span>🔥</span> <strong>Carne de Sol & Queijo Coalho Legítimos:</strong> Selecionados direto de produtores artesanais de Caicó/RN.</li>
+                    <li><span>🌾</span> <strong>Farofa & Vinagrete Caprichados:</strong> Espetos quentinhos ao lado da farofa crocante na manteiga da terra e vinagrete picado na hora.</li>
+                    <li><span>🍺</span> <strong>Atendimento de Botequim Raiz:</strong> Peça para receber em casa quentinho ou direto na sua mesa da calçada!</li>
+                </ul>
+            </div>
+
+            <div class="tradicao-image-frame">
+                <img src="{{ url_for('static', filename='img/espetinho_bg.jpg') }}"
+                     alt="Espetinhos assados, farofa e vinagrete no Botequim Caicó">
+                <div class="tradicao-caption">
+                    🍢 Nosso orgulho: Espetos bem assadinhos, farofa dourada e vinagrete fresquinho!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DRAWER LATERAL: COMANDA DO BOTEQUIM (CARRINHO & CHECKOUT) -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleComanda(false)"></div>
+    <aside class="comanda-drawer" id="comanda-drawer" aria-label="Comanda do Botequim">
+        <div class="drawer-header">
+            <h3>📝 Comanda Botequim Caicó</h3>
+            <button class="btn-close-drawer" onclick="toggleComanda(false)" title="Fechar Comanda">✕</button>
+        </div>
+
+        <div class="drawer-body">
+            <div id="comanda-items-list"></div>
+
+            <form id="checkout-form-section" class="checkout-form" onsubmit="enviarPedidoBotequim(event)">
+                <h4>Dados para o Churrasqueiro</h4>
+
+                <div class="form-group">
+                    <label for="cliente-nome">Seu Nome ou Apelido *</label>
+                    <input type="text" id="cliente-nome" placeholder="Ex: Chico de Caicó" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente-telefone">WhatsApp / Telefone</label>
+                    <input type="text" id="cliente-telefone" placeholder="(83) 99999-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente-modalidade">Como vai ser hoje?</label>
+                    <select id="cliente-modalidade">
+                        <option value="entrega">🛵 Entrega em Casa (+ R$ 5,00)</option>
+                        <option value="mesa">🪑 Estou na Mesa do Botequim (Sem Taxa)</option>
+                        <option value="retirada">🥡 Vou Retirar no Balcão (Sem Taxa)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label id="label-endereco-mesa" for="cliente-endereco">Endereço de Entrega (Rua e Bairro) *</label>
+                    <input type="text" id="cliente-endereco" placeholder="Rua e Bairro (Ex: Rua Principal, Centro...)">
+                </div>
+
+                <div id="campos-entrega-extras" style="display: grid; gap: 0.85rem;">
+                    <div class="form-group">
+                        <label for="cliente-numero-apto">Número e Apartamento / Complemento *</label>
+                        <input type="text" id="cliente-numero-apto" placeholder="Ex: Nº 120, Apto 202 (Bloco B)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cliente-referencia">Ponto de Referência *</label>
+                        <input type="text" id="cliente-referencia" placeholder="Ex: Próximo à praça, portão branco...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente-pagamento">Forma de Pagamento</label>
+                    <select id="cliente-pagamento">
+                        <option value="pix">💠 PIX (Chave na Comanda)</option>
+                        <option value="cartao">💳 Cartão de Crédito / Débito</option>
+                        <option value="dinheiro">💵 Dinheiro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente-obs">Observações para a Churrasqueira</label>
+                    <textarea id="cliente-obs" rows="2" placeholder="Ex: Capricha na manteiga da terra e manda pimenta de cheiro!"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div class="drawer-footer">
+            <div class="totals-row">
+                <span>Subtotal dos Espetos:</span>
+                <strong id="resumo-subtotal">R$ 0,00</strong>
+            </div>
+            <div class="totals-row">
+                <span>Taxa de Entrega:</span>
+                <strong id="resumo-taxa">R$ 0,00</strong>
+            </div>
+            <div class="totals-row final">
+                <span>Total da Comanda:</span>
+                <span id="resumo-total">R$ 0,00</span>
+            </div>
+
+            <button type="button" id="btn-submit-pedido" class="btn-finalizar" onclick="enviarPedidoBotequim(event)">
+                🔥 Mandar Pedido pra Brasa!
+            </button>
+        </div>
+    </aside>
+
+    <!-- MODAL DE CONFIRMAÇÃO (CUPOM IMPRESSO DE BOTEQUIM) -->
+    <div class="modal-backdrop" id="modal-confirmacao">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>🍢 Pedido Anotado na Brasa!</h3>
+                <button class="btn-close-drawer" onclick="fecharModalConfirmacao()">✕</button>
+            </div>
+            <div id="cupom-confirmacao-conteudo"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DE PEDIDOS NA BRASA AO VIVO -->
+    <div class="modal-backdrop" id="modal-brasa">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>🔥 Comandas na Churrasqueira</h3>
+                <button class="btn-close-drawer" onclick="fecharPainelBrasa()">✕</button>
+            </div>
+            <p style="font-size:0.86rem;color:#e5d5bc;margin-bottom:1rem;">
+                Acompanhe os pedidos recém-saídos para a brasa do <strong>Botequim Caicó</strong>:
+            </p>
+            <div id="lista-pedidos-brasa"></div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação -->
+    <div id="toast-botequim" class="toast-botequim"></div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="boteco-checker-strip" style="margin-bottom: 2rem;"></div>
+        <h4>Botequim Caicó</h4>
+        <p>O melhor espetinho bem assadinho com farofa e vinagrete.</p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #f59e0b;">
+            📍 Funcionamento: Segunda a Sábado das 18:00 às 23:30 • 📲 Pedidos WhatsApp: (83) 98762-3386
+        </p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

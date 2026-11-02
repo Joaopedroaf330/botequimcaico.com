@@ -1,0 +1,22 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco de dados local
+*.db
+*.sqlite3
+
+# IDEs e editores
+.idea/
+.vscode/
+
+# Variáveis de ambiente e sistema
+.env
+.DS_Store
+Thumbs.db

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: botequim-caico
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/cardapio
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: FLASK_DEBUG
+        value: "0"
