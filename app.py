@@ -776,7 +776,7 @@ def api_pedidos():
         if not itens_validados:
             return jsonify({"erro": "Nenhum item válido encontrado no pedido."}), 400
 
-        taxa_entrega = 5.00 if modalidade == "entrega" else 0.00
+        taxa_entrega = 8.00 if modalidade == "entrega" else 0.00
         total = round(subtotal + taxa_entrega, 2)
         agora = datetime.now()
         codigo = f"CAICO-{agora.strftime('%H%M%S')}"

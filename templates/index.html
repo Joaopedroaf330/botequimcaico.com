@@ -113,13 +113,14 @@
                 <span class="chalkboard-icon">👨‍🍳</span>
                 <div>
                     <h3>Recado do Churrasqueiro de Caicó:</h3>
-                    <p>Todos os nossos espetinhos de carne, frango, coração e linguiça já vão servidos <strong>com farofa na manteiga da terra e vinagrete fresquinho!</strong></p>
+                    <p>Todos os nossos espetinhos já vão servidos <strong>com farofa na manteiga da terra e vinagrete fresquinho!</strong><br>
+                    📍 <strong>Regiões de Entrega (Taxa R$ 8,00):</strong> Valentina • Mangabeira • Colibris • Portal do Sol • José Américo • Bancários em geral.</p>
                 </div>
             </div>
             <div class="chalkboard-pills">
-                <span class="chalk-pill">⚡ Entrega Rápida Quentinha</span>
-                <span class="chalk-pill">🪑 Mesas na Calçada</span>
-                <span class="chalk-pill">🧀 Queijo Coalho com Mel</span>
+                <span class="chalk-pill">🛵 Entrega (R$ 8,00)</span>
+                <span class="chalk-pill">🪑 Consumo na Mesa</span>
+                <span class="chalk-pill">🥡 Retirada no Balcão</span>
             </div>
         </div>
     </div>
@@ -231,7 +232,7 @@
                 </span>
                 <h3>Por que o Espetinho do Botequim Caicó é Diferente?</h3>
                 <p>
-                    Em Caicó, carne boa é assunto sério! Nosso botequim nasceu para juntar os amigos em volta da mesa de madeira, com cerveja trincando no copo americano e aquele cheiro irresistível de carne de sol assando no carvão em brasa.
+                    Em Caicó, carne boa é assunto sério! Nosso botequim nasceu para juntar os amigos em volta da mesa, com cerveja trincando no copo americano e aquele cheiro irresistível de carne de sol assando no carvão em brasa.
                 </p>
                 <ul class="tradicao-list">
                     <li><span>🔥</span> <strong>Carne de Sol & Queijo Coalho Legítimos:</strong> Selecionados direto de produtores artesanais de Caicó/RN.</li>
@@ -275,20 +276,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="cliente-modalidade">Como vai ser hoje?</label>
+                    <label for="cliente-modalidade">Modalidade do Pedido (Entrega, Mesa ou Retirada) *</label>
                     <select id="cliente-modalidade">
-                        <option value="entrega">🛵 Entrega em Casa (+ R$ 5,00)</option>
-                        <option value="mesa">🪑 Estou na Mesa do Botequim (Sem Taxa)</option>
-                        <option value="retirada">🥡 Vou Retirar no Balcão (Sem Taxa)</option>
+                        <option value="entrega">🛵 Entrega (+ R$ 8,00)</option>
+                        <option value="mesa">🪑 Mesa no Botequim (Sem Taxa)</option>
+                        <option value="retirada">🥡 Retirada no Balcão (Sem Taxa)</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label id="label-endereco-mesa" for="cliente-endereco">Endereço de Entrega (Rua e Bairro) *</label>
-                    <input type="text" id="cliente-endereco" placeholder="Rua e Bairro (Ex: Rua Principal, Centro...)">
+                <div id="campos-entrega-extras" style="display: grid; gap: 0.85rem;">
+                    <div class="form-group">
+                        <label for="cliente-regiao">Região de Entrega *</label>
+                        <select id="cliente-regiao">
+                            <option value="Valentina">📍 Valentina</option>
+                            <option value="Mangabeira">📍 Mangabeira</option>
+                            <option value="Colibris">📍 Colibris</option>
+                            <option value="Portal do Sol">📍 Portal do Sol</option>
+                            <option value="José Américo">📍 José Américo</option>
+                            <option value="Bancários em geral">📍 Bancários em geral</option>
+                        </select>
+                        <small style="color: #fbbf24; font-size: 0.76rem; margin-top: 0.25rem; display: block;">
+                            🛵 Entregamos em: Valentina, Mangabeira, Colibris, Portal do Sol, José Américo e Bancários em geral (Frete fixo: R$ 8,00).
+                        </small>
+                    </div>
                 </div>
 
-                <div id="campos-entrega-extras" style="display: grid; gap: 0.85rem;">
+                <div class="form-group">
+                    <label id="label-endereco-mesa" for="cliente-endereco">Endereço de Entrega (Rua) *</label>
+                    <input type="text" id="cliente-endereco" placeholder="Nome da Rua / Avenida...">
+                </div>
+
+                <div id="campos-entrega-complemento" style="display: grid; gap: 0.85rem;">
                     <div class="form-group">
                         <label for="cliente-numero-apto">Número e Apartamento / Complemento *</label>
                         <input type="text" id="cliente-numero-apto" placeholder="Ex: Nº 120, Apto 202 (Bloco B)">
@@ -371,6 +389,9 @@
         <p>O melhor espetinho bem assadinho com farofa e vinagrete.</p>
         <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #f59e0b;">
             📍 Funcionamento: Segunda a Sábado das 18:00 às 23:30 • 📲 Pedidos WhatsApp: (83) 98762-3386
+        </p>
+        <p style="font-size: 0.82rem; margin-top: 0.35rem; color: #e5d5bc;">
+            🛵 Regiões de Entrega (Frete R$ 8,00): Valentina • Mangabeira • Colibris • Portal do Sol • José Américo • Bancários em geral
         </p>
     </footer>
 

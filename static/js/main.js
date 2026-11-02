@@ -9,23 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarUI();
 
     const selectModalidade = document.getElementById('cliente-modalidade');
+
     if (selectModalidade) {
         selectModalidade.addEventListener('change', () => {
             const labelEnd = document.getElementById('label-endereco-mesa');
             const inputEnd = document.getElementById('cliente-endereco');
             const extrasEntrega = document.getElementById('campos-entrega-extras');
+            const compEntrega = document.getElementById('campos-entrega-complemento');
             if (selectModalidade.value === 'mesa') {
                 labelEnd.textContent = 'Número da Mesa no Botequim *';
                 inputEnd.placeholder = 'Ex: Mesa 07 (Calçada do Botequim)';
                 if (extrasEntrega) extrasEntrega.style.display = 'none';
+                if (compEntrega) compEntrega.style.display = 'none';
             } else if (selectModalidade.value === 'retirada') {
                 labelEnd.textContent = 'Observação para Retirada no Balcão';
                 inputEnd.placeholder = 'Ex: Passo aí em 20 minutinhos!';
                 if (extrasEntrega) extrasEntrega.style.display = 'none';
+                if (compEntrega) compEntrega.style.display = 'none';
             } else {
-                labelEnd.textContent = 'Endereço de Entrega (Rua e Bairro) *';
-                inputEnd.placeholder = 'Rua e Bairro (Ex: Rua Principal, Centro...)';
+                labelEnd.textContent = 'Endereço de Entrega (Rua) *';
+                inputEnd.placeholder = 'Nome da Rua / Avenida...';
                 if (extrasEntrega) extrasEntrega.style.display = 'grid';
+                if (compEntrega) compEntrega.style.display = 'grid';
             }
             atualizarUI();
         });
@@ -151,7 +156,7 @@ function atualizarUI() {
 
     const subtotal = comanda.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
     const modalidade = document.getElementById('cliente-modalidade')?.value || 'entrega';
-    const taxa = (comanda.length > 0 && modalidade === 'entrega') ? 5.00 : 0.00;
+    const taxa = (comanda.length > 0 && modalidade === 'entrega') ? 8.00 : 0.00;
     const total = subtotal + taxa;
 
     const elSub = document.getElementById('resumo-subtotal');
@@ -187,6 +192,7 @@ async function enviarPedidoBotequim(event) {
     const nome = document.getElementById('cliente-nome').value.trim();
     const telefone = document.getElementById('cliente-telefone').value.trim();
     const modalidade = document.getElementById('cliente-modalidade').value;
+    const regiao = (document.getElementById('cliente-regiao')?.value || '').trim();
     const endereco = document.getElementById('cliente-endereco').value.trim();
     const numeroApto = (document.getElementById('cliente-numero-apto')?.value || '').trim();
     const referencia = (document.getElementById('cliente-referencia')?.value || '').trim();
@@ -200,8 +206,13 @@ async function enviarPedidoBotequim(event) {
     }
 
     if (modalidade === 'entrega') {
+        if (!regiao) {
+            mostrarToast('⚠️ Selecione a região/bairro de entrega!');
+            document.getElementById('cliente-regiao')?.focus();
+            return;
+        }
         if (!endereco) {
-            mostrarToast('⚠️ Informe a rua e o bairro de entrega!');
+            mostrarToast('⚠️ Informe a rua de entrega!');
             document.getElementById('cliente-endereco').focus();
             return;
         }
@@ -218,7 +229,7 @@ async function enviarPedidoBotequim(event) {
     }
 
     const enderecoFinal = modalidade === 'entrega'
-        ? `${endereco}, Nº/Apto: ${numeroApto} | Ref: ${referencia}`
+        ? `${regiao} — ${endereco}, Nº/Apto: ${numeroApto} | Ref: ${referencia}`
         : endereco;
 
     const btn = document.getElementById('btn-submit-pedido');
@@ -234,6 +245,7 @@ async function enviarPedidoBotequim(event) {
                 cliente_nome: nome,
                 cliente_telefone: telefone,
                 modalidade: modalidade,
+                regiao_entrega: regiao,
                 endereco_ou_mesa: enderecoFinal,
                 pagamento: pagamento,
                 observacoes: observacoes,
@@ -280,7 +292,8 @@ function exibirCupomConfirmacao(pedido) {
         `💳 *Pagamento:* ${pedido.pagamento.toUpperCase()}\n\n` +
         `*ITENS NA BRASA:*\n` +
         pedido.itens.map(i => `- ${i.quantidade}x ${i.nome} (${i.ponto})`).join('\n') +
-        `\n\n💰 *Total:* R$ ${pedido.total.toFixed(2).replace('.', ',')}`
+        `\n\n🛵 *Frete:* R$ ${pedido.taxa_entrega.toFixed(2).replace('.', ',')}` +
+        `\n💰 *Total:* R$ ${pedido.total.toFixed(2).replace('.', ',')}`
     );
 
     container.innerHTML = `
@@ -297,6 +310,10 @@ function exibirCupomConfirmacao(pedido) {
             <hr style="border:none;border-top:1px dashed #78350f;margin:0.55rem 0;">
             ${linhasItens}
             <hr style="border:none;border-top:1px dashed #78350f;margin:0.55rem 0;">
+            <div style="display:flex;justify-content:space-between;font-size:0.86rem;margin-bottom:0.25rem;">
+                <span>Taxa de Entrega:</span>
+                <strong>R$ ${pedido.taxa_entrega.toFixed(2).replace('.', ',')}</strong>
+            </div>
             <div style="display:flex;justify-content:space-between;font-size:1.05rem;font-weight:800;">
                 <span>TOTAL DA COMANDA:</span>
                 <span>R$ ${pedido.total.toFixed(2).replace('.', ',')}</span>
